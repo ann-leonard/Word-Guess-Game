@@ -27,12 +27,9 @@ function newGame(){
     for (i =1; i < 27; i++){
       buttons.push(document.getElementsByClassName('btn')[i])
     }
-  /*
-  I thought I would be able to do something like
-  buttons.style.backgroundColor = 'initial'
-  and just have it set back to default because the original color is built into the class name via bootstrap but nope
-  */
-
+    for (i =0; i < 27; i++){
+    buttons[i].style.backgroundColor = null;
+  }
 }
 
 //Takes in letter pressed and sees if it's in the word
