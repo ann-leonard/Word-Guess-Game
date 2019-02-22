@@ -29,16 +29,16 @@
     </div>
     <div class="row">
       <div class="col-8 p-0 bg-dark">
-        <div class="jumbotron text-center text-white bg-dark  ml-3">
+        <div id=game class="jumbotron text-center text-white bg-dark  ml-3">
           <h1 class="display-4" id="jumbo">Hello, world!</h1>
-          <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-          <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+
+          <a  id="resetButton" class="btn btn-primary btn-lg" href="#" role="button">New game</a>
         </div>
       </div>
       <div class="col-4 bg-dark">
         <ul class="list-group mt-5">
           <li class="list-group-item list-group-item-dark font-weight-bold">Number of guesses remaining: </li>
-          <li class="list-group-item list-group-item-dark">placehold</li>
+          <li id="domGuesses" class="list-group-item list-group-item-dark">placehold</li>
           <li class="list-group-item list-group-item-dark font-weight-bold">Number of wins:</li>
           <li id="winNum" class="list-group-item list-group-item-dark">placehold</li>
           <li class="list-group-item list-group-item-dark font-weight-bold">Incorrect guesses are displayed in red</li>
@@ -47,7 +47,7 @@
     </div>
     <div class="row">
         <div class="col-12 text-white bg-dark">
-          <div class="btn-toolbar">
+          <div id="buttonBar" class="btn-toolbar">
             <div class="btn-group btn-group-md  mb-5">
               <div class="mx-auto" style="width: 100%;">
                 <button class="btn btn-dark">A</button>
