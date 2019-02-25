@@ -32,79 +32,67 @@ function newGame(){
     (document.getElementsByClassName('btn')[i]).style.backgroundColor = null;
   }
 }
-//does not work- needs to take 1 away from guessesLeft when user enters letter not in word
-function guessesLeftCount(userChoice){
-
-  for (i =8; i<word.length;i--){
-    console.log(userChoice)
-    console.log(word[i])
-      if (userChoice != word[i]){
-         --guessesLeft;
-          
-      return true;
-      break
-      }
-      else{
-        return false;
-      }
-  }
-}
 
 function storeIndex(userChoice){
   var index_of_letter=[];
   for (l=0; l<word.length;l++){
     if (word[l]===userChoice){
         index_of_letter.push(l)
-    }userChoice
-  }guessesLeftCount
+    }
+  }
   return index_of_letter;
 }
 
-
 function updateSpaces(userChoice){
-  for (i=0; i<letters.length;i++){
 
-      if (userChoice === letters[i]){
-        for (j=0; j<word.length;j++){
-          if (word[j]===userChoice){
+  var letterIndex = letters.indexOf( userChoice);
 
-            index_of_letter=storeIndex(userChoice);
+  if (letterIndex >= 0) {
 
+      var indexes_of_letter = storeIndex(userChoice);
+            
+      buttons[letterIndex].style.backgroundColor = (indexes_of_letter.length > 0) ? 'green' : 'red';
 
-            buttons[i].style.backgroundColor = 'green'
-
-            for(k=0; k < index_of_letter.length;k++){
-              spaces[index_of_letter[k]]=userChoice
-              document.getElementById("jumbo").innerHTML = spaces.join(' ')
-              if (spaces.join('') === word){
-                score++
-                domWinScore.innerHTML = score;
-              }
-            }
-
-            break
-        }
-            else{
-                for (k=0; k<word.length;k++){
-                  if(word[k] != userChoice){
-                  buttons[i].style.backgroundColor = 'red';
-                  }
-                }
-            }
+      for ( i = 0; i < indexes_of_letter.length; i++) {
+           spaces[indexes_of_letter[i]] = userChoice;
       }
-    }
+
+      document.getElementById("jumbo").innerHTML = spaces.join(' ');
+
+      if (indexes_of_letter.length === 0) {
+         domGuesses.innerHTML = --guessesLeft;
+
+         if (guessesLeft === 0) {
+            gameRunning = false; 
+         }
+
+      }
+
+      if (spaces.join('') === word) {
+         domWinScore.innerHTML = ++score;
+         gameRunning = false;
+      }
   }
 }
 
 
-
 //Takes in letter pressed and sees if it's in the word
+
 function gameLogic(userChoice){
-  var userChoice = event.key; 
-    guessesLeftCount(userChoice);
-    updateSpaces(userChoice);
-    return userChoice;
-  }
+   
+   if (gameRunning) {
+      var userChoice = event.key;
+  
+      if (!guessedLetterBank.includes(userChoice)) {
+          guessedLetterBank.push(userChoice);
+          updateSpaces(userChoice);
+       }
+    } 
+
+    document.getElementById("resetButton").hidden = gameRunning;
+
+    return;
+}
 
 
 
